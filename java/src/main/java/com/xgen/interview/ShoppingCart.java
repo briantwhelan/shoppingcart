@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class ShoppingCart implements IShoppingCart
 {
-    HashMap<String, Integer> contents = new HashMap<>();
+    HashMap<String, Integer> contents;
     Pricer pricer;
 
     /**
@@ -21,6 +21,7 @@ public class ShoppingCart implements IShoppingCart
      */
     public ShoppingCart(Pricer pricer)
     {
+        this.contents = new HashMap<String, Integer>();
         this.pricer = pricer;
     }
 
@@ -46,6 +47,8 @@ public class ShoppingCart implements IShoppingCart
 
     /**
      * Prints the receipt for the current state of the {@code ShoppingCart}.
+     * Items are printed in the format <item> - <quantity> - <price>.
+     * The total is printed at the end of the receipt.
      */
     public void printReceipt()
     {
