@@ -35,13 +35,17 @@ public class ShoppingCart implements IShoppingCart
     {
         Object[] keys = contents.keySet().toArray();
 
+        float totalPrice = 0;
         for(int i = 0; i < Array.getLength(keys) ; i++)
         {
             Integer price = pricer.getPrice((String)keys[i]) * contents.get(keys[i]);
             Float priceFloat = new Float(new Float(price) / 100);
+            totalPrice += priceFloat;
             String priceString = String.format("€%.2f", priceFloat);
 
             System.out.println(keys[i] + " - " + contents.get(keys[i]) + " - " + priceString);
         }
+        String totalPriceString = String.format("€%.2f", totalPrice);
+        System.out.println("Total: " + totalPriceString);
     }
 }

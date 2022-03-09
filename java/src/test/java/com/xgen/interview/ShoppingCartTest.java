@@ -22,7 +22,7 @@ public class ShoppingCartTest
         System.setOut(new PrintStream(myOut));
 
         sc.printReceipt();
-        assertEquals(String.format("apple - 1 - €1.00%n"), myOut.toString());
+        assertEquals(String.format("apple - 1 - €1.00%nTotal: €1.00%n"), myOut.toString());
     }
 
     @Test
@@ -36,7 +36,7 @@ public class ShoppingCartTest
         System.setOut(new PrintStream(myOut));
 
         sc.printReceipt();
-        assertEquals(String.format("apple - 2 - €2.00%n"), myOut.toString());
+        assertEquals(String.format("apple - 2 - €2.00%nTotal: €2.00%n"), myOut.toString());
     }
 
     @Test
@@ -56,11 +56,11 @@ public class ShoppingCartTest
 
         if(result.startsWith("apple"))
         {
-            assertEquals(String.format("apple - 2 - €2.00%nbanana - 1 - €2.00%n"), result);
+            assertEquals(String.format("apple - 2 - €2.00%nbanana - 1 - €2.00%nTotal: €4.00%n"), result);
         }
         else
         {
-            assertEquals(String.format("banana - 1 - €2.00%napple - 2 - €2.00%n"), result);
+            assertEquals(String.format("banana - 1 - €2.00%napple - 2 - €2.00%nTotal: €4.00%n"), result);
         }
     }
 
@@ -75,7 +75,7 @@ public class ShoppingCartTest
         System.setOut(new PrintStream(myOut));
 
         sc.printReceipt();
-        assertEquals(String.format("crisps - 2 - €0.00%n"), myOut.toString());
+        assertEquals(String.format("crisps - 2 - €0.00%nTotal: €0.00%n"), myOut.toString());
     }
 }
 
