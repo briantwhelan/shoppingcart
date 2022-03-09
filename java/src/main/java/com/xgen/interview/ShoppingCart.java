@@ -13,11 +13,24 @@ public class ShoppingCart implements IShoppingCart
     HashMap<String, Integer> contents = new HashMap<>();
     Pricer pricer;
 
+    /**
+     * Creates a {@code ShoppingCart} with the specified {@Pricer}.
+     *
+     * @param pricer the {@code Pricer} which holds the information
+     * regarding the prices of items
+     */
     public ShoppingCart(Pricer pricer)
     {
         this.pricer = pricer;
     }
 
+    /**
+     * Adds an item to the {@code ShoppingCart}.
+     *
+     * @param itemType the type of item being added
+     * @param number the quantity of the {@code itemType} 
+     * being added
+     */
     public void addItem(String itemType, int number)
     {
         if(!contents.containsKey(itemType))
@@ -31,6 +44,9 @@ public class ShoppingCart implements IShoppingCart
         }
     }
 
+    /**
+     * Prints the receipt for the current state of the {@code ShoppingCart}.
+     */
     public void printReceipt()
     {
         Object[] keys = contents.keySet().toArray();

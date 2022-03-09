@@ -9,6 +9,9 @@ public class Pricer
 {
     HashMap<String, Integer> pricingDatabase = new HashMap<>(); // stub
 
+    /**
+     * Creates a {@Pricer} which contains the pricing information for various items
+     */
     public Pricer()
     {
         pricingDatabase.put("apple", 100);
@@ -16,8 +19,13 @@ public class Pricer
     }
 
     /**
-     * Returns the price of the item passed, in Euro-cent. Eg. if an item costs €1, this will return 100
-     * If itemType is an unknown string, store policy is that the item is free.
+     * Gets the price for the specified item according to the data in the
+     * {@code Pricer}
+     *
+     * @param itemType the type of item for which a price is required
+     * @return the price of the {@code itemType} in euro-cent according 
+     * to the {@code Pricer} (or 0 if the {@code Pricer} has no price
+     * information for the {@code itemType}
      */
     public Integer getPrice(String itemType)
     {
