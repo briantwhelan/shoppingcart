@@ -77,5 +77,26 @@ public class ShoppingCartTest
         sc.printReceipt();
         assertEquals(String.format("crisps - 2 - €0.00%nTotal: €0.00%n"), myOut.toString());
     }
+
+    @Test
+    public void canRetrieveItemFields()
+    {
+        Item item = new Item("apple", 2, 100);
+        assertEquals("apple", item.getName());
+        assertEquals(2, item.getQuantity());
+        assertEquals(100, item.getPrice());
+    }
+
+    @Test
+    public void canAdjustItemQuantity()
+    {
+        Item item = new Item("apple", 2, 100);
+        item.adjustQuantity(-3);
+        assertEquals("Testing invalid quantity adjustment...", 2, item.getQuantity());
+        item.adjustQuantity(5);
+        assertEquals("Testing valid positive quantity adjustment...", 7, item.getQuantity());
+        item.adjustQuantity(-2);
+        assertEquals("Testing valid negative quantity adjustment...", 5, item.getQuantity());
+    }
 }
 
