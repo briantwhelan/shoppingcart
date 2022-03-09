@@ -4,8 +4,8 @@ package com.xgen.interview;
  * This is the interface used by the existing shopping tills in our supermarket
  * It cannot be changed without upgrading/replacing legacy hardware.
  */
-interface IShoppingCart {
-
+interface IShoppingCart
+{
   /**
    * Called once for every item/collection of items that is scanned by the till.
    * @param itemType - The item being scanned by the hardware
@@ -19,3 +19,4 @@ interface IShoppingCart {
    */
   void printReceipt();
 }
+
