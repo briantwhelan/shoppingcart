@@ -87,7 +87,7 @@ public class ShoppingCartTest
         shoppingCart.addItem("apple", 1);    
         shoppingCart.printReceipt();
 
-        assertEquals(String.format("apple - 1 - €1.00%nTotal: €1.00%n"), myOut.toString());
+        assertEquals("Testing adding a single item...", String.format("apple - 1 - €1.00%nTotal: €1.00%n"), myOut.toString());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class ShoppingCartTest
         shoppingCart.addItem("apple", 2);
         shoppingCart.printReceipt();
 
-        assertEquals(String.format("apple - 2 - €2.00%nTotal: €2.00%n"), myOut.toString());
+        assertEquals("Testing adding multiple items...", String.format("apple - 2 - €2.00%nTotal: €2.00%n"), myOut.toString());
     }
 
     @Test
@@ -106,7 +106,7 @@ public class ShoppingCartTest
         shoppingCart.addItem("banana", 1);
         shoppingCart.printReceipt();
 
-        assertEquals(String.format("apple - 2 - €2.00%nbanana - 1 - €2.00%nTotal: €4.00%n"), myOut.toString());
+        assertEquals("Testing adding different items...", String.format("apple - 2 - €2.00%nbanana - 1 - €2.00%nTotal: €4.00%n"), myOut.toString());
     }
     
     @Test
@@ -116,7 +116,7 @@ public class ShoppingCartTest
         shoppingCart.addItem("apple", 1);
         shoppingCart.printReceipt();
 
-        assertEquals(String.format("apple - 3 - €3.00%nTotal: €3.00%n"), myOut.toString());
+        assertEquals("Testing adding the same items...", String.format("apple - 3 - €3.00%nTotal: €3.00%n"), myOut.toString());
     }
 
     @Test
@@ -128,7 +128,7 @@ public class ShoppingCartTest
         shoppingCart.addItem("crisps", 1);
         shoppingCart.printReceipt();
     
-        assertEquals(String.format("apple - 5 - €5.00%nbanana - 1 - €2.00%ncrisps - 1 - €0.00%nTotal: €7.00%n"), myOut.toString());
+        assertEquals("Testing the order of the receipt items...", String.format("apple - 5 - €5.00%nbanana - 1 - €2.00%ncrisps - 1 - €0.00%nTotal: €7.00%n"), myOut.toString());
     }
 
     @Test
@@ -137,7 +137,7 @@ public class ShoppingCartTest
         shoppingCart.addItem("crisps", 2);
         shoppingCart.printReceipt();
 
-        assertEquals(String.format("crisps - 2 - €0.00%nTotal: €0.00%n"), myOut.toString());
+        assertEquals("Testing adding a mystery item...", String.format("crisps - 2 - €0.00%nTotal: €0.00%n"), myOut.toString());
     }
 }
 
