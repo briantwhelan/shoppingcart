@@ -25,7 +25,6 @@ public class ShoppingCartTest
         item = new Item("apple", 2, 100);
         myOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(myOut));
-
     }
 
     @After
