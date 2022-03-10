@@ -4,7 +4,7 @@ public class Item
 {
     private static final Integer CUSTOMER_QUANTITY_LIMIT = 100;
 
-    private final String name;
+    private final String type;
     private int quantity;
     private final int priceInCents;
 
@@ -12,33 +12,18 @@ public class Item
      * Creates an {@code Item} with the specified name and 
      * initial quantity.
      *
-     * @param name the name of the item
+     * @param type the type of the item
      * @param quantity the initial quantity of the item (if this
      * is not a valid quantity, the initial quanity is set to 1)
      * @param priceInCents the price of the item in Euro-cents
      */
-    public Item(String name, int quantity, int priceInCents)
+    public Item(String type, int quantity, int priceInCents)
     {
-        this.name = name;
+        this.type = type;
         this.quantity = (isValidQuantity(quantity) ? quantity : 1);
         this.priceInCents = priceInCents; 
     }
-
-    /**
-     * Adjusts the quantity of {@code Item} by the specified adjustment
-     * (provided the adjustment results in a valid quantity).
-     *
-     * @param adjustment the adjustment to make to the quantity (positive 
-     * values increase the quantity, negative values reduce the quantity)
-     */
-    public void adjustQuantity(int adjustment)
-    {
-        if(isValidQuantity(quantity + adjustment))
-        {
-            quantity += adjustment;
-        }
-    }
-
+    
     /**
      * Checks whether the specified quantity is valid.
      * Quantities between 1 and the {@code CUSTOMER_QUANTITY_LIMIT}
@@ -60,15 +45,30 @@ public class Item
     }
 
     /**
-     * Gets the name of the {@code Item}.
+     * Adjusts the quantity of {@code Item} by the specified adjustment
+     * (provided the adjustment results in a valid quantity).
      *
-     * @return the name
+     * @param adjustment the adjustment to make to the quantity (positive 
+     * values increase the quantity, negative values reduce the quantity)
      */
-    public String getName()
+    public void adjustQuantity(int adjustment)
     {
-        return name;
+        if(isValidQuantity(quantity + adjustment))
+        {
+            quantity += adjustment;
+        }
     }
     
+    /**
+     * Gets the type of the {@code Item}.
+     *
+     * @return the item type
+     */
+    public String getType()
+    {
+        return type;
+    }
+
     /**
      * Gets the current quantity of the {@code Item}.
      *

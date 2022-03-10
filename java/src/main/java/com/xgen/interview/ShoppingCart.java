@@ -10,9 +10,9 @@ import java.util.*;
  */
 public class ShoppingCart implements IShoppingCart
 {
-    HashMap<String, Integer> contents;
-    Pricer pricer;
-
+    private HashMap<String, Item> contents;
+    private Pricer pricer;
+    
     /**
      * Creates a {@code ShoppingCart} with the specified {@Pricer}.
      *
@@ -21,8 +21,20 @@ public class ShoppingCart implements IShoppingCart
      */
     public ShoppingCart(Pricer pricer)
     {
-        this.contents = new HashMap<String, Integer>();
+        this.contents = new HashMap<String, Item>();
         this.pricer = pricer;
+    }
+
+    /**
+     * Checks whether the specified {@code Item} is in the {@ShoppingCart}.
+     *
+     * @param item the item to check whether it exists
+     * @return {@code true} if {@code item} is already exists and 
+     * {@code false} otherwise 
+     */
+    private boolean isInShoppingCart(String item)
+    {
+        return contents.containsKey(item);
     }
 
     /**
@@ -34,14 +46,15 @@ public class ShoppingCart implements IShoppingCart
      */
     public void addItem(String itemType, int number)
     {
-        if(!contents.containsKey(itemType))
+        if(isInShoppingCart(itemType))
         {
-            contents.put(itemType, number);
+            Item item = contents.get(itemType);
+            item.adjustQuantity(number);
         }
         else
         {
-            int existing = contents.get(itemType);
-            contents.put(itemType, existing + number);
+            Item newItem = new Item(itemType, number, pricer.getPrice(itemType));
+            contents.put(itemType, newItem);
         }
     }
 
