@@ -86,6 +86,7 @@ public class ShoppingCartTest
     {
         shoppingCart.addItem("apple", 1);    
         shoppingCart.printReceipt();
+
         assertEquals(String.format("apple - 1 - €1.00%nTotal: €1.00%n"), myOut.toString());
     }
 
@@ -94,6 +95,7 @@ public class ShoppingCartTest
     {
         shoppingCart.addItem("apple", 2);
         shoppingCart.printReceipt();
+
         assertEquals(String.format("apple - 2 - €2.00%nTotal: €2.00%n"), myOut.toString());
     }
 
@@ -118,10 +120,23 @@ public class ShoppingCartTest
     }
 
     @Test
+    public void printsInOrderOfScan()
+    {
+        shoppingCart.addItem("apple", 2);
+        shoppingCart.addItem("banana", 1);
+        shoppingCart.addItem("apple", 3);
+        shoppingCart.addItem("crisps", 1);
+        shoppingCart.printReceipt();
+    
+        assertEquals(String.format("apple - 5 - €5.00%nbanana - 1 - €2.00%ncrisps - 1 - €0.00%nTotal: €7.00%n"), myOut.toString());
+    }
+
+    @Test
     public void doesntExplodeOnMysteryItem()
     {
         shoppingCart.addItem("crisps", 2);
         shoppingCart.printReceipt();
+
         assertEquals(String.format("crisps - 2 - €0.00%nTotal: €0.00%n"), myOut.toString());
     }
 }
