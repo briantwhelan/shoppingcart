@@ -3,7 +3,6 @@ package com.xgen.interview;
 import java.lang.reflect.Array;
 import java.util.*;
 
-
 /**
  * This is the current implementation of ShoppingCart.
  * Please write a replacement
@@ -11,6 +10,7 @@ import java.util.*;
 public class ShoppingCart implements IShoppingCart
 {
     private HashMap<String, Item> contents;
+    private LinkedList<String> scanOrder;
     private Pricer pricer;
     
     /**
@@ -22,6 +22,7 @@ public class ShoppingCart implements IShoppingCart
     public ShoppingCart(Pricer pricer)
     {
         this.contents = new HashMap<String, Item>();
+        this.scanOrder = new LinkedList<String>();
         this.pricer = pricer;
     }
 
@@ -55,27 +56,25 @@ public class ShoppingCart implements IShoppingCart
         {
             Item newItem = new Item(itemType, number, pricer.getPrice(itemType));
             contents.put(itemType, newItem);
+            scanOrder.add(itemType);
         }
     }
 
     /**
      * Prints the receipt for the current state of the {@code ShoppingCart}.
-     * Items are printed in the format <item> - <quantity> - <price>.
+     * Items are printed in the format <type> - <quantity> - <price>.
+     * (This can be easily adjusted by changing the method called to print 
+     * each item e.g. use item.printPriceFirst() to print the price first).
      * The total is printed at the end of the receipt.
      */
     public void printReceipt()
     {
-        Object[] keys = contents.keySet().toArray();
-
         float totalPrice = 0;
-        for(int i = 0; i < Array.getLength(keys) ; i++)
+        while(scanOrder.size() > 0)
         {
-            Integer price = pricer.getPrice((String)keys[i]) * contents.get(keys[i]);
-            Float priceFloat = new Float(new Float(price) / 100);
-            totalPrice += priceFloat;
-            String priceString = String.format("€%.2f", priceFloat);
-
-            System.out.println(keys[i] + " - " + contents.get(keys[i]) + " - " + priceString);
+            Item item = contents.get(scanOrder.remove());
+            item.printTypeFirst();    
+            totalPrice += item.getTotalPriceInEuro();
         }
         String totalPriceString = String.format("€%.2f", totalPrice);
         System.out.println("Total: " + totalPriceString);

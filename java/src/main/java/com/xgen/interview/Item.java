@@ -2,6 +2,7 @@ package com.xgen.interview;
 
 public class Item
 {
+    private static final Integer NUMBER_OF_CENTS_IN_A_EURO = 100;
     private static final Integer CUSTOMER_QUANTITY_LIMIT = 100;
 
     private final String type;
@@ -78,15 +79,49 @@ public class Item
     {
         return quantity;
     }
-    
+       
     /**
-     * Gets the price, in Euro-cent, of the {@code Item}.
+     * Gets the total price, in Euro, of the {@code Item}.
      *
-     * @return the price in Euro-cent
+     * @return the total price in Euro
      */
-    public int getPrice()
+    public float getTotalPriceInEuro()
     {
-        return priceInCents;
+        return (((float) priceInCents * (float) quantity) / (float) NUMBER_OF_CENTS_IN_A_EURO);
+    }
+
+    /**
+     * Gets the total price {@code String} of the {@code Item}.
+     *
+     * @return the total price {@code String}
+     */
+    private String getTotalPriceString()
+    {
+        return String.format("€%.2f", getTotalPriceInEuro());
+    }
+
+    /**
+     * Prints the {@code Item} in the format <type> - <quantity> - <price>.
+     */
+    public void printTypeFirst()
+    {
+        System.out.println(type + " - " + quantity + " - " + getTotalPriceString());
+    }
+  
+    /**
+     * Prints the {@code Item} in the format <quantity> - <type> - <price>.
+     */
+    public void printQuantityFirst()
+    {
+        System.out.println(quantity + " - " + type + " - " + getTotalPriceString());
+    }
+
+     /**
+     * Prints the {@code Item} in the format <price> - <type> - <quantity>.
+     */
+    public void printPriceFirst()
+    {
+        System.out.println(getTotalPriceString() + " - " + type + " - " + quantity);
     }
 }
 
